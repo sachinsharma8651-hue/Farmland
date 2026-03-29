@@ -4,6 +4,8 @@
     { "src": "farmland/**", "use": "@vercel/static" }
   ],
   "routes": [
+    { "src": "/styles/(.*)", "dest": "/farmland/styles/$1" },
+    { "src": "/js/(.*)", "dest": "/farmland/js/$1" },
     { "src": "/$", "dest": "/farmland/index.html" },
     { "src": "/(.*)", "dest": "/farmland/$1" }
   ]
