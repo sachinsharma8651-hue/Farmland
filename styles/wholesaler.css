@@ -1,0 +1,574 @@
+/* Wholesaler Dashboard Specific Styles */
+
+/* View Toggle */
+.view-toggle {
+    display: flex;
+    gap: 10px;
+}
+
+.view-btn {
+    padding: 10px 20px;
+    border: 2px solid #4CAF50;
+    background: transparent;
+    color: #4CAF50;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.view-btn.active,
+.view-btn:hover {
+    background: #4CAF50;
+    color: white;
+}
+
+/* Wholesale Product Grid */
+.wholesale-product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.wholesale-product-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.wholesale-product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.wholesale-product-header {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.wholesale-product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.wholesale-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.wholesale-product-info {
+    padding: 20px;
+}
+
+.wholesale-product-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #2c5530;
+    margin-bottom: 8px;
+}
+
+.wholesale-farmer-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #4CAF50;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.wholesale-product-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.wholesale-detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.wholesale-detail-label {
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.wholesale-detail-value {
+    font-weight: bold;
+    color: #2c5530;
+}
+
+.wholesale-price {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-bottom: 15px;
+}
+
+.wholesale-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-bulk-order {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s;
+    flex: 1;
+}
+
+.btn-bulk-order:hover {
+    background: #45a049;
+    transform: translateY(-1px);
+}
+
+.btn-visit-farm {
+    background: transparent;
+    color: #007bff;
+    border: 2px solid #007bff;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s;
+    flex: 1;
+}
+
+.btn-visit-farm:hover {
+    background: #007bff;
+    color: white;
+}
+
+/* Farms Grid */
+.farms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.farm-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    transition: all 0.3s;
+}
+
+.farm-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.farm-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.farm-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2c5530;
+    margin-bottom: 5px;
+}
+
+.farm-location {
+    color: #666;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.partnership-status {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.status-partner {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-potential {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.farm-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.farm-stat {
+    text-align: center;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+}
+
+.farm-stat-value {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.farm-stat-label {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 2px;
+}
+
+.farm-products {
+    margin-bottom: 15px;
+}
+
+.farm-products h4 {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.product-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.product-tag {
+    background: #e8f5e8;
+    color: #2c5530;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+}
+
+.farm-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-partner {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    flex: 1;
+}
+
+.btn-partner:hover {
+    background: #218838;
+}
+
+.btn-contact {
+    background: transparent;
+    color: #007bff;
+    border: 1px solid #007bff;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    flex: 1;
+}
+
+.btn-contact:hover {
+    background: #007bff;
+    color: white;
+}
+
+/* Visits Container */
+.visits-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.visit-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    transition: transform 0.3s;
+}
+
+.visit-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.visit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.visit-farm {
+    font-weight: bold;
+    color: #2c5530;
+    font-size: 1.1rem;
+}
+
+.visit-status {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.status-scheduled {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.status-completed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-cancelled {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.visit-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.visit-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.visit-detail-label {
+    font-size: 0.8rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.visit-detail-value {
+    font-weight: bold;
+    color: #2c5530;
+}
+
+.visit-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.visit-actions button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.btn-reschedule {
+    background: #ffc107;
+    color: #212529;
+}
+
+.btn-cancel-visit {
+    background: #dc3545;
+    color: white;
+}
+
+/* Product Summary in Modal */
+.product-summary {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.product-summary-header {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.product-summary-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.product-summary-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-summary-info h3 {
+    color: #2c5530;
+    margin-bottom: 5px;
+}
+
+.product-summary-farmer {
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+.product-summary-details {
+    display: flex;
+    gap: 20px;
+    font-size: 0.9rem;
+}
+
+/* Farm Summary in Modal */
+.farm-summary {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.farm-summary h3 {
+    color: #2c5530;
+    margin-bottom: 10px;
+}
+
+.farm-summary-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+/* Order Total */
+.order-total {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2c5530;
+}
+
+/* Large Modal */
+.large-modal {
+    max-width: 900px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .wholesale-product-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .farms-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .view-toggle {
+        flex-direction: column;
+    }
+    
+    .wholesale-product-details {
+        grid-template-columns: 1fr;
+    }
+    
+    .wholesale-actions {
+        flex-direction: column;
+    }
+    
+    .farm-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .farm-actions {
+        flex-direction: column;
+    }
+    
+    .visit-details {
+        grid-template-columns: 1fr;
+    }
+    
+    .visit-actions {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+    
+    .product-summary-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .product-summary-details {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .farm-summary-details {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .wholesale-product-card {
+        margin: 0 -10px;
+    }
+    
+    .farm-card {
+        margin: 0 -10px;
+    }
+    
+    .visit-card {
+        margin: 0 -10px;
+    }
+    
+    .large-modal {
+        margin: 2% auto;
+        width: 95%;
+    }
+}
