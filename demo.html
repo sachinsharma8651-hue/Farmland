@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Guide - Farmer 2 Consumer</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .demo-container {
+            max-width: 1000px;
+            margin: 100px auto 50px;
+            padding: 0 20px;
+        }
+        .demo-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .demo-card h2 {
+            color: #2c5530;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .demo-accounts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .account-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+        }
+        .account-type {
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+        .credentials {
+            font-family: monospace;
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 5px 0;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        .feature-list i {
+            color: #4CAF50;
+            width: 20px;
+        }
+        .quick-start {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            text-align: center;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .quick-start h1 {
+            margin-bottom: 10px;
+        }
+        .quick-start p {
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        .demo-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .demo-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .demo-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-seedling"></i>
+                <span>Farmer 2 Consumer</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <button class="btn-login" onclick="window.location.href='index.html'">
+                    <i class="fas fa-home"></i> Back to Home
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="demo-container">
+        <div class="quick-start">
+            <h1><i class="fas fa-rocket"></i> Demo Guide</h1>
+            <p>Explore the complete Farmer 2 Consumer platform with pre-loaded sample data</p>
+            <div class="demo-buttons">
+                <a href="index.html" class="demo-btn">
+                    <i class="fas fa-home"></i> Start Demo
+                </a>
+                <a href="#accounts" class="demo-btn">
+                    <i class="fas fa-user"></i> View Accounts
+                </a>
+                <a href="#features" class="demo-btn">
+                    <i class="fas fa-list"></i> Features
+                </a>
+            </div>
+        </div>
+
+        <div id="accounts" class="demo-card">
+            <h2><i class="fas fa-users"></i> Demo Accounts</h2>
+            <p>Use these pre-configured accounts to test different user experiences:</p>
+            
+            <div class="demo-accounts">
+                <div class="account-card">
+                    <div class="account-type"><i class="fas fa-tractor"></i> Farmers</div>
+                    <div class="credentials">Email: rajesh@farm.com</div>
+                    <div class="credentials">Password: farmer123</div>
+                    <small>Rajesh Kumar - Haryana Farmer</small>
+                    <hr style="margin: 10px 0;">
+                    <div class="credentials">Email: priya@farm.com</div>
+                    <div class="credentials">Password: farmer123</div>
+                    <small>Priya Sharma - Punjab Farmer</small>
+                    <hr style="margin: 10px 0;">
+                    <div class="credentials">Email: amit@farm.com</div>
+                    <div class="credentials">Password: farmer123</div>
+                    <small>Amit Singh - UP Farmer</small>
+                </div>
+
+                <div class="account-card">
+                    <div class="account-type"><i class="fas fa-shopping-cart"></i> Consumers</div>
+                    <div class="credentials">Email: anita@consumer.com</div>
+                    <div class="credentials">Password: consumer123</div>
+                    <small>Anita Verma - Gurgaon Consumer</small>
+                    <hr style="margin: 10px 0;">
+                    <div class="credentials">Email: rohit@consumer.com</div>
+                    <div class="credentials">Password: consumer123</div>
+                    <small>Rohit Gupta - Delhi Consumer</small>
+                </div>
+
+                <div class="account-card">
+                    <div class="account-type"><i class="fas fa-warehouse"></i> Wholesalers</div>
+                    <div class="credentials">Email: contact@freshmart.com</div>
+                    <div class="credentials">Password: wholesaler123</div>
+                    <small>Fresh Mart Distributors - Delhi</small>
+                </div>
+            </div>
+        </div>
+
+        <div id="features" class="demo-card">
+            <h2><i class="fas fa-star"></i> Key Features to Test</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 20px;">
+                <div>
+                    <h3 style="color: #4CAF50; margin-bottom: 15px;"><i class="fas fa-tractor"></i> Farmer Features</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-plus"></i> Add new products with photos</li>
+                        <li><i class="fas fa-tags"></i> Set wholesale/retail pricing</li>
+                        <li><i class="fas fa-star"></i> Grade products (A/B)</li>
+                        <li><i class="fas fa-shopping-bag"></i> Manage customer orders</li>
+                        <li><i class="fas fa-calendar"></i> Schedule deliveries</li>
+                        <li><i class="fas fa-chart-line"></i> View earnings dashboard</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 style="color: #4CAF50; margin-bottom: 15px;"><i class="fas fa-shopping-cart"></i> Consumer Features</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-search"></i> Browse and filter products</li>
+                        <li><i class="fas fa-cart-plus"></i> Add items to cart</li>
+                        <li><i class="fas fa-heart"></i> Save favorite products</li>
+                        <li><i class="fas fa-credit-card"></i> Easy checkout process</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Location-based matching</li>
+                        <li><i class="fas fa-receipt"></i> Track order history</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 style="color: #4CAF50; margin-bottom: 15px;"><i class="fas fa-warehouse"></i> Wholesaler Features</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-boxes"></i> Bulk ordering (100kg+)</li>
+                        <li><i class="fas fa-handshake"></i> Partner with farms</li>
+                        <li><i class="fas fa-map-marked-alt"></i> Schedule farm visits</li>
+                        <li><i class="fas fa-dollar-sign"></i> Wholesale pricing</li>
+                        <li><i class="fas fa-truck"></i> Flexible delivery terms</li>
+                        <li><i class="fas fa-phone"></i> Direct farmer contact</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-card">
+            <h2><i class="fas fa-play-circle"></i> How to Start</h2>
+            <ol style="line-height: 2; font-size: 1.1rem;">
+                <li><strong>Go to Homepage:</strong> Click "Start Demo" or visit <code>index.html</code></li>
+                <li><strong>Register/Login:</strong> Use any demo account from above</li>
+                <li><strong>Explore Dashboard:</strong> Each user type has a different interface</li>
+                <li><strong>Test Features:</strong> Try adding products, placing orders, etc.</li>
+                <li><strong>Switch Users:</strong> Logout and try different account types</li>
+            </ol>
+        </div>
+
+        <div class="demo-card">
+            <h2><i class="fas fa-lightbulb"></i> Demo Scenarios</h2>
+            
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-top: 15px;">
+                <h4 style="color: #2c5530; margin-bottom: 10px;">Scenario 1: Farmer Journey</h4>
+                <p>1. Login as Rajesh (farmer) → 2. Add a new vegetable product → 3. Upload photo → 4. Set retail quantities → 5. Check orders from consumers</p>
+            </div>
+
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-top: 15px;">
+                <h4 style="color: #2c5530; margin-bottom: 10px;">Scenario 2: Consumer Journey</h4>
+                <p>1. Login as Anita (consumer) → 2. Browse products by location → 3. Add items to cart → 4. Checkout with delivery preferences → 5. Track order status</p>
+            </div>
+
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-top: 15px;">
+                <h4 style="color: #2c5530; margin-bottom: 10px;">Scenario 3: Wholesaler Journey</h4>
+                <p>1. Login as Fresh Mart (wholesaler) → 2. Find bulk products → 3. Place 500kg potato order → 4. Schedule farm visit → 5. Add partner farms</p>
+            </div>
+        </div>
+
+        <div class="demo-card" style="text-align: center; background: linear-gradient(135deg, #e8f5e8, #f0f8f0);">
+            <h2><i class="fas fa-rocket"></i> Ready to Explore?</h2>
+            <p style="margin-bottom: 30px;">Start your journey with the Farmer 2 Consumer platform!</p>
+            <a href="index.html" class="btn-primary" style="display: inline-flex; align-items: center; gap: 10px; padding: 15px 30px; font-size: 1.1rem;">
+                <i class="fas fa-play"></i> Launch Demo
+            </a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Farmer 2 Consumer Demo. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

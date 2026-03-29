@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Dashboard - Farmer 2 Consumer</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link rel="stylesheet" href="styles/enhancements.css">
+    <link rel="stylesheet" href="styles/chatbox.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-seedling"></i>
+                <span>Farmer 2 Consumer</span>
+            </div>
+            <div class="nav-links">
+                <span id="welcomeMessage">Welcome, Farmer!</span>
+                <button class="btn-secondary" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <div>
+                    <h1><i class="fas fa-tractor"></i> Farmer Dashboard</h1>
+                    <p>Manage your products and orders</p>
+                </div>
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <h3 id="totalProducts">0</h3>
+                        <p>Products Listed</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="totalOrders">0</h3>
+                        <p>Active Orders</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="totalEarnings">₹0</h3>
+                        <p>Total Earnings</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-nav">
+                <button class="active" onclick="showSection('products')">
+                    <i class="fas fa-apple-alt"></i> My Products
+                </button>
+                <button onclick="showSection('add-product')">
+                    <i class="fas fa-plus"></i> Add Product
+                </button>
+                <button onclick="showSection('orders')">
+                    <i class="fas fa-shopping-bag"></i> Orders
+                </button>
+                <button onclick="showSection('schedule')">
+                    <i class="fas fa-calendar"></i> Schedule
+                </button>
+                <button onclick="showSection('profile')">
+                    <i class="fas fa-user"></i> Profile
+                </button>
+            </div>
+
+            <!-- Products Section -->
+            <div id="products-section" class="dashboard-content">
+                <div class="section-header">
+                    <h2>My Products</h2>
+                    <div class="filters">
+                        <select id="categoryFilter" onchange="filterProducts()">
+                            <option value="">All Categories</option>
+                            <option value="vegetables">Vegetables</option>
+                            <option value="fruits">Fruits</option>
+                        </select>
+                        <select id="gradeFilter" onchange="filterProducts()">
+                            <option value="">All Grades</option>
+                            <option value="A">Grade A</option>
+                            <option value="B">Grade B</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="productsGrid" class="product-grid">
+                    <!-- Products will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Add Product Section -->
+            <div id="add-product-section" class="dashboard-content hidden">
+                <h2>Add New Product</h2>
+                <form id="addProductForm" class="product-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productName">Product Name:</label>
+                            <input type="text" id="productName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productCategory">Category:</label>
+                            <select id="productCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="vegetables">Vegetables</option>
+                                <option value="fruits">Fruits</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productGrade">Grade:</label>
+                            <select id="productGrade" required>
+                                <option value="">Select Grade</option>
+                                <option value="A">Grade A (Big size, shiny)</option>
+                                <option value="B">Grade B (Small size, less shiny)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="sellingType">Selling Type:</label>
+                            <select id="sellingType" required onchange="toggleQuantityOptions()">
+                                <option value="">Select Type</option>
+                                <option value="wholesale">Wholesale</option>
+                                <option value="retail">Small Quantity</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="quantityOptions" class="form-group hidden">
+                        <label>Available Quantities:</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" value="250g"> 250g</label>
+                            <label><input type="checkbox" value="500g"> 500g</label>
+                            <label><input type="checkbox" value="1kg"> 1kg</label>
+                            <label><input type="checkbox" value="2kg"> 2kg</label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="totalQuantity">Total Available Quantity (kg):</label>
+                            <input type="number" id="totalQuantity" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="basePrice">Base Price (per kg):</label>
+                            <input type="number" id="basePrice" min="1" step="0.01" required>
+                            <small>System will auto-adjust based on mandi prices</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productDescription">Description:</label>
+                        <textarea id="productDescription" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productImage">Product Image:</label>
+                        <input type="file" id="productImage" accept="image/*" required onchange="previewImage(this, 'imagePreview')">
+                        <img id="imagePreview" class="image-preview hidden" alt="Preview">
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-plus"></i> Add Product
+                    </button>
+                </form>
+            </div>
+
+            <!-- Orders Section -->
+            <div id="orders-section" class="dashboard-content hidden">
+                <h2>Orders</h2>
+                <div class="orders-filter">
+                    <button class="filter-btn active" onclick="filterOrders('all')">All Orders</button>
+                    <button class="filter-btn" onclick="filterOrders('pending')">Pending</button>
+                    <button class="filter-btn" onclick="filterOrders('confirmed')">Confirmed</button>
+                    <button class="filter-btn" onclick="filterOrders('delivered')">Delivered</button>
+                </div>
+                <div id="ordersContainer" class="orders-container">
+                    <!-- Orders will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Schedule Section -->
+            <div id="schedule-section" class="dashboard-content hidden">
+                <h2>Delivery Schedule</h2>
+                <div class="schedule-container">
+                    <div class="schedule-shift">
+                        <h3><i class="fas fa-sun"></i> Morning Shift (6 AM - 12 PM)</h3>
+                        <div id="morningSchedule" class="schedule-items">
+                            <!-- Morning orders will be loaded here -->
+                        </div>
+                    </div>
+                    <div class="schedule-shift">
+                        <h3><i class="fas fa-moon"></i> Evening Shift (2 PM - 8 PM)</h3>
+                        <div id="eveningSchedule" class="schedule-items">
+                            <!-- Evening orders will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Section -->
+            <div id="profile-section" class="dashboard-content hidden">
+                <h2>Profile Settings</h2>
+                <form id="profileForm" class="profile-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="profileName">Name:</label>
+                            <input type="text" id="profileName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profileEmail">Email:</label>
+                            <input type="email" id="profileEmail" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="profilePhone">Phone:</label>
+                            <input type="tel" id="profilePhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profileAddress">Address:</label>
+                            <textarea id="profileAddress" required></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary">Update Profile</button>
+                </form>
+
+                <div class="password-section">
+                    <h3>Change Password</h3>
+                    <form id="passwordForm">
+                        <div class="form-group">
+                            <label for="currentPassword">Current Password:</label>
+                            <input type="password" id="currentPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">New Password:</label>
+                            <input type="password" id="newPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm New Password:</label>
+                            <input type="password" id="confirmPassword" required>
+                        </div>
+                        <button type="submit" class="btn-secondary">Change Password</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Product Edit Modal -->
+    <div id="editProductModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('editProductModal')">&times;</span>
+            <h2>Edit Product</h2>
+            <form id="editProductForm">
+                <input type="hidden" id="editProductId">
+                <!-- Similar form fields as add product -->
+                <div class="form-group">
+                    <label for="editProductName">Product Name:</label>
+                    <input type="text" id="editProductName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editTotalQuantity">Total Available Quantity (kg):</label>
+                    <input type="number" id="editTotalQuantity" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="editBasePrice">Base Price (per kg):</label>
+                    <input type="number" id="editBasePrice" min="1" step="0.01" required>
+                </div>
+                <button type="submit" class="btn-primary">Update Product</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/farmer-dashboard.js"></script>
+    <script src="js/chatbox-config.js"></script>
+    <script src="js/chatbox.js"></script>
+</body>
+</html>

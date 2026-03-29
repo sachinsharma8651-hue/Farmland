@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Chatbox - Farmer 2 Consumer</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/enhancements.css">
+    <link rel="stylesheet" href="styles/chatbox.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0f8f0, #e8f5e8);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .debug-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 800px;
+        }
+        .debug-title {
+            color: #2c5530;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        .debug-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .status-good {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .status-error {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .debug-console {
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            text-align: left;
+            max-height: 200px;
+            overflow-y: auto;
+            margin: 20px 0;
+        }
+        .test-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin: 10px 0;
+        }
+        .test-input:focus {
+            border-color: #ABB900;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-container">
+        <h1 class="debug-title">🔧 Chatbox Debug Page</h1>
+        
+        <div class="debug-info">
+            <h3>🧪 Debug Information</h3>
+            <div id="apiStatus">Checking API configuration...</div>
+            <div id="chatboxStatus">Checking chatbox initialization...</div>
+            <div id="inputStatus">Checking input functionality...</div>
+        </div>
+
+        <div>
+            <h3>Test Input Field (should work normally):</h3>
+            <input type="text" class="test-input" placeholder="Type here to test input..." id="testInput">
+            <div>Characters typed: <span id="charCount">0</span></div>
+        </div>
+
+        <div class="debug-console" id="debugConsole">
+            Console output will appear here...
+        </div>
+
+        <div style="margin-top: 30px;">
+            <button onclick="testChatbox()" class="btn-primary" style="margin: 10px;">Test Chatbox</button>
+            <button onclick="clearConsole()" class="btn-secondary" style="margin: 10px;">Clear Console</button>
+            <button onclick="testAPI()" class="btn-primary" style="margin: 10px;">Test API</button>
+        </div>
+
+        <div style="margin-top: 20px; padding: 20px; background: #fff3cd; border-radius: 10px;">
+            <h4>🔍 Troubleshooting Steps:</h4>
+            <ol style="text-align: left;">
+                <li><strong>Check Console:</strong> Open browser DevTools (F12) and check Console tab</li>
+                <li><strong>Test Input:</strong> Type in the test input field above</li>
+                <li><strong>API Test:</strong> Click "Test API" to verify Google Gemini connection</li>
+                <li><strong>Chatbox Test:</strong> Click "Test Chatbox" to open and test</li>
+            </ol>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/chatbox-config.js"></script>
+    <script src="js/chatbox.js"></script>
+    
+    <script>
+        let debugConsole = document.getElementById('debugConsole');
+        let originalConsoleLog = console.log;
+        let originalConsoleError = console.error;
+
+        // Capture console output
+        console.log = function(...args) {
+            originalConsoleLog.apply(console, args);
+            debugConsole.innerHTML += '<div style="color: #00ff00;">[LOG] ' + args.join(' ') + '</div>';
+            debugConsole.scrollTop = debugConsole.scrollHeight;
+        };
+
+        console.error = function(...args) {
+            originalConsoleError.apply(console, args);
+            debugConsole.innerHTML += '<div style="color: #ff4444;">[ERROR] ' + args.join(' ') + '</div>';
+            debugConsole.scrollTop = debugConsole.scrollHeight;
+        };
+
+        // Test input functionality
+        document.getElementById('testInput').addEventListener('input', function(e) {
+            document.getElementById('charCount').textContent = e.target.value.length;
+            console.log('Test input value:', e.target.value);
+        });
+
+        function clearConsole() {
+            debugConsole.innerHTML = 'Console cleared...<br>';
+        }
+
+        function testChatbox() {
+            console.log('Testing chatbox...');
+            if (window.chatbox) {
+                console.log('✅ Chatbox object exists');
+                window.chatbox.toggleChatbox();
+                console.log('✅ Chatbox toggled');
+                
+                // Test input after a delay
+                setTimeout(() => {
+                    const input = document.getElementById('chatbox-input');
+                    if (input) {
+                        console.log('✅ Chatbox input found');
+                        input.focus();
+                        console.log('✅ Input focused');
+                        input.value = 'Test message';
+                        console.log('✅ Test value set:', input.value);
+                    } else {
+                        console.error('❌ Chatbox input not found');
+                    }
+                }, 500);
+            } else {
+                console.error('❌ Chatbox object not found');
+            }
+        }
+
+        async function testAPI() {
+            console.log('Testing Google Gemini API...');
+            const config = window.CHATBOX_CONFIG;
+            
+            if (!config) {
+                console.error('❌ Config not found');
+                return;
+            }
+
+            console.log('API Provider:', config.apiProvider);
+            console.log('API Key:', config.apiKey ? 'Present' : 'Missing');
+            console.log('API Endpoint:', config.apiEndpoint);
+
+            try {
+                const apiIntegration = new window.APIIntegration(config);
+                const response = await apiIntegration.callAPI('Hello, this is a test message');
+                console.log('✅ API Response:', response);
+            } catch (error) {
+                console.error('❌ API Error:', error.message);
+            }
+        }
+
+        // Status checks
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                // Check API status
+                const config = window.CHATBOX_CONFIG;
+                const apiStatus = document.getElementById('apiStatus');
+                if (config && config.apiProvider === 'gemini' && config.apiKey) {
+                    apiStatus.innerHTML = '<span class="status-good">✅ Google Gemini API configured</span>';
+                } else {
+                    apiStatus.innerHTML = '<span class="status-error">❌ API not configured properly</span>';
+                }
+
+                // Check chatbox status
+                const chatboxStatus = document.getElementById('chatboxStatus');
+                if (window.chatbox) {
+                    chatboxStatus.innerHTML = '<span class="status-good">✅ Chatbox initialized</span>';
+                } else {
+                    chatboxStatus.innerHTML = '<span class="status-error">❌ Chatbox not initialized</span>';
+                }
+
+                // Check input status
+                const inputStatus = document.getElementById('inputStatus');
+                const chatInput = document.getElementById('chatbox-input');
+                if (chatInput) {
+                    inputStatus.innerHTML = '<span class="status-good">✅ Chat input field found</span>';
+                } else {
+                    inputStatus.innerHTML = '<span class="status-error">❌ Chat input field not found</span>';
+                }
+
+                console.log('Debug page loaded successfully');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

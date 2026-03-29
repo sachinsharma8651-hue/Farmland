@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Farmer 2 Consumer - Fresh from Farm to Home</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/enhancements.css">
+    <link rel="stylesheet" href="styles/chatbox.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-seedling"></i>
+                <span>Farmer 2 Consumer</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#products">Products</a>
+                <a href="#contact">Contact</a>
+                <div class="header-actions">
+                    <div class="cart-icon" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                    <button class="btn-login" onclick="showLoginModal()">Login</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Cart Dropdown -->
+    <div id="cartDropdown" class="cart-dropdown">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button class="cart-close" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Your cart is empty</p>
+                <small>Add some fresh produce to get started!</small>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total: ₹<span id="cartTotal">0</span></strong>
+            </div>
+            <button class="btn-checkout" onclick="checkout()">
+                <i class="fas fa-credit-card"></i> Checkout
+            </button>
+        </div>
+    </div>
+
+    <main>
+        <!-- Promotional Banner -->
+        <section class="promo-banner">
+            <div class="promo-content">
+                <div class="promo-item">
+                    <i class="fas fa-leaf"></i>
+                    <span>100% Fresh</span>
+                </div>
+                <div class="promo-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Quality Guaranteed</span>
+                </div>
+                <div class="promo-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Same Day Delivery</span>
+                </div>
+                <div class="promo-item">
+                    <i class="fas fa-truck"></i>
+                    <span>Farm to Door</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <div class="hero-image-top">
+                    <div class="fresh-produce-image">
+                        <i class="fas fa-apple-alt"></i>
+                        <i class="fas fa-carrot"></i>
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                </div>
+                <h1 class="hero-title">Connecting Farmers & Consumers Directly</h1>
+                <p class="hero-subtitle">Fresh produce delivered straight from the farm to your doorstep</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary animated-btn hero-buy-btn" onclick="showRegisterModal()">
+                        <i class="fas fa-shopping-cart"></i> Buy
+                    </button>
+                    <button class="btn-secondary animated-btn hero-sell-btn" onclick="showRegisterModal()">
+                        <i class="fas fa-seedling"></i> Sell
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Products Section -->
+        <section id="products" class="products">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Fresh Products Available</h2>
+                    <p>Discover our wide variety of fresh, locally-sourced produce</p>
+                </div>
+                <div class="product-categories">
+                    <div class="category-filter">
+                        <button class="filter-btn active" data-category="all">All Products</button>
+                        <button class="filter-btn" data-category="vegetables">🥕 Vegetables</button>
+                        <button class="filter-btn" data-category="fruits">🍎 Fruits</button>
+                    </div>
+                </div>
+                <div class="product-grid">
+                    <!-- Vegetables -->
+                    <div class="product-card" data-category="vegetables" onclick="openProductDetails('carrots')">
+                        <div class="product-image carrot-image">
+                            <div class="product-visual">🥕</div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Fresh Carrots</h3>
+                            <p class="product-description">Organic, locally grown carrots</p>
+                            <div class="grade-selection">
+                                <label>Select Grade:</label>
+                                <div class="grade-options">
+                                    <button class="grade-btn active" onclick="selectGrade(this, 'grade-a', 45)" data-grade="grade-a" data-price="45">
+                                        <span class="grade-badge grade-a">Grade A</span>
+                                        <span class="grade-price">₹45/kg</span>
+                                    </button>
+                                    <button class="grade-btn" onclick="selectGrade(this, 'grade-b', 35)" data-grade="grade-b" data-price="35">
+                                        <span class="grade-badge grade-b">Grade B</span>
+                                        <span class="grade-price">₹35/kg</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="product-details">
+                                <span class="farmer">by Green Valley Farm</span>
+                            </div>
+                            <div class="quantity-selector">
+                                <label>Quantity:</label>
+                                <div class="quantity-options">
+                                    <button class="quantity-btn" onclick="selectQuantity(this, '250g')">250g</button>
+                                    <button class="quantity-btn" onclick="selectQuantity(this, '500g')">500g</button>
+                                    <button class="quantity-btn active" onclick="selectQuantity(this, '1kg')">1kg</button>
+                                </div>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn-add-cart" onclick="addToCartWithSelection(this, 'carrots', 'Fresh Carrots')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="vegetables" onclick="openProductDetails('peppers')">
+                        <div class="product-image pepper-image">
+                            <div class="product-visual">🌶️</div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Bell Peppers</h3>
+                            <p class="product-description">Colorful, crisp bell peppers</p>
+                            <div class="grade-selection">
+                                <label>Select Grade:</label>
+                                <div class="grade-options">
+                                    <button class="grade-btn active" onclick="selectGrade(this, 'grade-a', 65)" data-grade="grade-a" data-price="65">
+                                        <span class="grade-badge grade-a">Grade A</span>
+                                        <span class="grade-price">₹65/kg</span>
+                                    </button>
+                                    <button class="grade-btn" onclick="selectGrade(this, 'grade-b', 50)" data-grade="grade-b" data-price="50">
+                                        <span class="grade-badge grade-b">Grade B</span>
+                                        <span class="grade-price">₹50/kg</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="product-details">
+                                <span class="farmer">by Sunny Acres</span>
+                            </div>
+                            <div class="quantity-selector">
+                                <label>Quantity:</label>
+                                <div class="quantity-options">
+                                    <button class="quantity-btn" onclick="selectQuantity(this, '250g')">250g</button>
+                                    <button class="quantity-btn" onclick="selectQuantity(this, '500g')">500g</button>
+                                    <button class="quantity-btn active" onclick="selectQuantity(this, '1kg')">1kg</button>
+                                </div>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn-add-cart" onclick="addToCartWithSelection(this, 'peppers', 'Bell Peppers')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="vegetables" onclick="openProductDetails('spinach')">
+                        <div class="product-image spinach-image">
+                            <div class="product-visual">🥬</div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Spinach</h3>
+                            <p class="product-description">Fresh green leafy spinach</p>
+                            <div class="grade-selection">
+                                <label>Select Grade:</label>
+                                <div class="grade-options">
+                                    <button class="grade-btn active" onclick="selectGrade(this, 'grade-a', 30)" data-grade="grade-a" data-price="30">
+                                        <span class="grade-badge grade-a">Grade A</span>
+                                        <span class="grade-price">₹30/kg</span>
+                                    </button>
+                                    <button class="grade-btn" onclick="selectGrade(this, 'grade-b', 22)" data-grade="grade-b" data-price="22">
+                                        <span class="grade-badge grade-b">Grade B</span>
+                                        <span class="grade-price">₹22/kg</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="product-details">
+                                <span class="farmer">by Organic Fields</span>
+                            </div>
+                            <div class="quantity-selector">
+                                <label>Quantity:</label>
+                                <div class="quantity-options">
+                                    <button class="quantity-btn" onclick="selectQuantity(this, '250g')">250g</button>
+                                    <button class="quantity-btn" onclick="selectQuantity(this, '500g')">500g</button>
+                                    <button class="quantity-btn active" onclick="selectQuantity(this, '1kg')">1kg</button>
+                                </div>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn-add-cart" onclick="addToCartWithSelection(this, 'spinach', 'Spinach')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fruits -->
+                    <div class="product-card" data-category="fruits" onclick="openProductDetails('apples')">
+                        <div class="product-image apple-image">
+                            <div class="product-visual">🍎</div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Red Apples</h3>
+                            <p class="product-description">Sweet and crunchy red apples</p>
+                            <div class="grade-selection">
+                                <label>Select Grade:</label>
+                                <div class="grade-options">
+                                    <button class="grade-btn active" onclick="selectGrade(this, 'grade-a', 130)" data-grade="grade-a" data-price="130">
+                                        <span class="grade-badge grade-a">Grade A</span>
+                                        <span class="grade-price">₹130/kg</span>
+                                    </button>
+                                    <button class="grade-btn" onclick="selectGrade(this, 'grade-b', 100)" data-grade="grade-b" data-price="100">
+                                        <span class="grade-badge grade-b">Grade B</span>
+                                        <span class="grade-price">₹100/kg</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="product-details">
+                                <span class="farmer">by Mountain Orchards</span>
+                            </div>
+                            <div class="quantity-selector">
+                                <label>Quantity:</label>
+                                <div class="quantity-options">
+                                    <button class="quantity-btn" onclick="selectQuantity(this, '250g')">250g</button>
+                                    <button class="quantity-btn" onclick="selectQuantity(this, '500g')">500g</button>
+                                    <button class="quantity-btn active" onclick="selectQuantity(this, '1kg')">1kg</button>
+                                </div>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn-add-cart" onclick="addToCartWithSelection(this, 'apples', 'Red Apples')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="fruits" onclick="openProductDetails('lemons')">
+                        <div class="product-image lemon-image">
+                            <div class="product-visual">🍋</div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Fresh Lemons</h3>
+                            <p class="product-description">Juicy, vitamin-rich lemons</p>
+                            <div class="grade-selection">
+                                <label>Select Grade:</label>
+                                <div class="grade-options">
+                                    <button class="grade-btn active" onclick="selectGrade(this, 'grade-a', 85)" data-grade="grade-a" data-price="85">
+                                        <span class="grade-badge grade-a">Grade A</span>
+                                        <span class="grade-price">₹85/kg</span>
+                                    </button>
+                                    <button class="grade-btn" onclick="selectGrade(this, 'grade-b', 70)" data-grade="grade-b" data-price="70">
+                                        <span class="grade-badge grade-b">Grade B</span>
+                                        <span class="grade-price">₹70/kg</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="product-details">
+                                <span class="farmer">by Citrus Grove</span>
+                            </div>
+                            <div class="quantity-selector">
+                                <label>Quantity:</label>
+                                <div class="quantity-options">
+                                    <button class="quantity-btn" onclick="selectQuantity(this, '250g')">250g</button>
+                                    <button class="quantity-btn" onclick="selectQuantity(this, '500g')">500g</button>
+                                    <button class="quantity-btn active" onclick="selectQuantity(this, '1kg')">1kg</button>
+                                </div>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn-add-cart" onclick="addToCartWithSelection(this, 'lemons', 'Fresh Lemons')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="fruits" onclick="openProductDetails('bananas')">
+                        <div class="product-image banana-image">
+                            <div class="product-visual">🍌</div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Bananas</h3>
+                            <p class="product-description">Ripe, sweet bananas</p>
+                            <div class="grade-selection">
+                                <label>Select Grade:</label>
+                                <div class="grade-options">
+                                    <button class="grade-btn active" onclick="selectGrade(this, 'grade-a', 55)" data-grade="grade-a" data-price="55">
+                                        <span class="grade-badge grade-a">Grade A</span>
+                                        <span class="grade-price">₹55/kg</span>
+                                    </button>
+                                    <button class="grade-btn" onclick="selectGrade(this, 'grade-b', 40)" data-grade="grade-b" data-price="40">
+                                        <span class="grade-badge grade-b">Grade B</span>
+                                        <span class="grade-price">₹40/kg</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="product-details">
+                                <span class="farmer">by Tropical Farms</span>
+                            </div>
+                            <div class="quantity-selector">
+                                <label>Quantity:</label>
+                                <div class="quantity-options">
+                                    <button class="quantity-btn" onclick="selectQuantity(this, '250g')">250g</button>
+                                    <button class="quantity-btn" onclick="selectQuantity(this, '500g')">500g</button>
+                                    <button class="quantity-btn active" onclick="selectQuantity(this, '1kg')">1kg</button>
+                                </div>
+                            </div>
+                            <div class="product-actions">
+                                <button class="btn-add-cart" onclick="addToCartWithSelection(this, 'bananas', 'Bananas')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="products-cta">
+                    <button class="btn-primary view-all-btn" onclick="showRegisterModal()">
+                        <i class="fas fa-shopping-cart"></i> View All Products
+                    </button>
+                    <p class="cta-note">Register to access our full product catalog and place orders</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Bottom Quote Section -->
+        <section class="bottom-quote-section">
+            <div class="container">
+                <div class="quote-content">
+                    <div class="quote-image">
+                        <div class="vegetable-basket">
+                            <i class="fas fa-shopping-basket"></i>
+                            <div class="floating-vegetables">
+                                <i class="fas fa-apple-alt"></i>
+                                <i class="fas fa-carrot"></i>
+                                <i class="fas fa-pepper-hot"></i>
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quote-text">
+                        <blockquote class="main-quote">
+                            "Fresh from the fields, delivered with love."
+                        </blockquote>
+                        <p class="quote-subline">
+                            Because real freshness starts at the farm, not the store.
+                        </p>
+                        <div class="quote-buttons">
+                            <button class="btn-primary quote-cta-btn" onclick="showRegisterModal()">
+                                <i class="fas fa-shopping-cart"></i> Start Shopping
+                            </button>
+                            <button class="btn-secondary quote-cta-btn" onclick="showRegisterModal()">
+                                <i class="fas fa-seedling"></i> Join as Farmer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Verified Farmers Section -->
+        <section class="verified-farmers">
+            <div class="container">
+                <div class="farmers-header">
+                    <h2>Our Verified Farmers</h2>
+                    <div class="verification-badges">
+                        <div class="badge-item">
+                            <i class="fas fa-shield-check"></i>
+                            <span>Quality Verified</span>
+                        </div>
+                        <div class="badge-item">
+                            <i class="fas fa-certificate"></i>
+                            <span>Certified Organic</span>
+                        </div>
+                        <div class="badge-item">
+                            <i class="fas fa-award"></i>
+                            <span>Trusted Partners</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="farmers-scroll-container">
+                    <div class="farmers-scroll">
+                        <div class="farmer-card">
+                            <div class="farmer-photo">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="farmer-info">
+                                <h4>Ramesh Kumar</h4>
+                                <p class="farmer-location">Punjab</p>
+                                <p class="farmer-description">Supplying fresh onions daily with 15+ years of farming experience</p>
+                                <div class="farmer-speciality">🧅 Onions • 🥔 Potatoes</div>
+                            </div>
+                        </div>
+
+                        <div class="farmer-card">
+                            <div class="farmer-photo">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="farmer-info">
+                                <h4>Priya Sharma</h4>
+                                <p class="farmer-location">Maharashtra</p>
+                                <p class="farmer-description">Organic vegetable specialist growing premium quality produce</p>
+                                <div class="farmer-speciality">🥕 Carrots • 🌶️ Peppers</div>
+                            </div>
+                        </div>
+
+                        <div class="farmer-card">
+                            <div class="farmer-photo">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="farmer-info">
+                                <h4>Suresh Patel</h4>
+                                <p class="farmer-location">Gujarat</p>
+                                <p class="farmer-description">Fresh fruit orchards delivering seasonal fruits year-round</p>
+                                <div class="farmer-speciality">🍎 Apples • 🍋 Lemons</div>
+                            </div>
+                        </div>
+
+                        <div class="farmer-card">
+                            <div class="farmer-photo">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="farmer-info">
+                                <h4>Kavita Singh</h4>
+                                <p class="farmer-location">Uttar Pradesh</p>
+                                <p class="farmer-description">Leafy greens and herbs grown using sustainable farming methods</p>
+                                <div class="farmer-speciality">🥬 Spinach • 🌿 Herbs</div>
+                            </div>
+                        </div>
+
+                        <div class="farmer-card">
+                            <div class="farmer-photo">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="farmer-info">
+                                <h4>Arjun Reddy</h4>
+                                <p class="farmer-location">Andhra Pradesh</p>
+                                <p class="farmer-description">Tropical fruit cultivation with focus on natural farming practices</p>
+                                <div class="farmer-speciality">🍌 Bananas • 🥭 Mangoes</div>
+                            </div>
+                        </div>
+
+                        <div class="farmer-card">
+                            <div class="farmer-photo">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="farmer-info">
+                                <h4>Meera Joshi</h4>
+                                <p class="farmer-location">Rajasthan</p>
+                                <p class="farmer-description">Desert farming expert specializing in drought-resistant crops</p>
+                                <div class="farmer-speciality">🌾 Grains • 🫘 Pulses</div>
+                            </div>
+                        </div>
+
+                        <!-- Duplicate cards for seamless scrolling -->
+                        <div class="farmer-card">
+                            <div class="farmer-photo">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="farmer-info">
+                                <h4>Ramesh Kumar</h4>
+                                <p class="farmer-location">Punjab</p>
+                                <p class="farmer-description">Supplying fresh onions daily with 15+ years of farming experience</p>
+                                <div class="farmer-speciality">🧅 Onions • 🥔 Potatoes</div>
+                            </div>
+                        </div>
+
+                        <div class="farmer-card">
+                            <div class="farmer-photo">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="farmer-info">
+                                <h4>Priya Sharma</h4>
+                                <p class="farmer-location">Maharashtra</p>
+                                <p class="farmer-description">Organic vegetable specialist growing premium quality produce</p>
+                                <div class="farmer-speciality">🥕 Carrots • 🌶️ Peppers</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content enhanced-modal login-modal-redesigned">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            
+            <!-- Login Welcome Section -->
+            <div class="login-welcome">
+                <div class="welcome-icon">
+                    <i class="fas fa-sign-in-alt"></i>
+                </div>
+                <h1>Welcome Back!</h1>
+                <p class="welcome-subtitle">Sign in to continue your fresh journey</p>
+            </div>
+
+            <!-- Login Steps -->
+            <div class="login-steps">
+                <div class="step-indicator">
+                    <div class="step active" id="loginStep1Indicator">
+                        <span>1</span>
+                        <label>Account Type</label>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step" id="loginStep2Indicator">
+                        <span>2</span>
+                        <label>Credentials</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="login-form-redesigned">
+                <!-- Step 1: User Type Selection -->
+                <div class="login-step active" id="loginStep1">
+                    <h3>Select Your Account Type</h3>
+                    <div class="login-user-types">
+                        <div class="login-type-card" onclick="selectLoginUserType('farmer')">
+                            <div class="login-type-icon">🌾</div>
+                            <h4>Farmer</h4>
+                            <p>Access your farm dashboard and manage products</p>
+                        </div>
+                        <div class="login-type-card" onclick="selectLoginUserType('consumer')">
+                            <div class="login-type-icon">🛒</div>
+                            <h4>Consumer</h4>
+                            <p>Browse and purchase fresh produce</p>
+                        </div>
+                        <div class="login-type-card" onclick="selectLoginUserType('wholesaler')">
+                            <div class="login-type-icon">🏭</div>
+                            <h4>Wholesaler</h4>
+                            <p>Access bulk ordering and bidding features</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Credentials -->
+                <div class="login-step" id="loginStep2">
+                    <div class="step-header">
+                        <button type="button" class="btn-back-login" onclick="prevLoginStep()">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <h3>Enter Your Credentials</h3>
+                    </div>
+                    
+                    <input type="hidden" id="selectedLoginUserType" value="">
+                    
+                    <div class="login-form-grid">
+                        <div class="form-group modern-input">
+                            <input type="email" id="loginEmail" required>
+                            <label for="loginEmail">Email Address</label>
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="form-group modern-input">
+                            <input type="password" id="loginPassword" required>
+                            <label for="loginPassword">Password</label>
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="login-options">
+                        <label class="remember-me">
+                            <input type="checkbox" id="rememberMe">
+                            <span class="checkmark"></span>
+                            Remember me
+                        </label>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn-login-submit">
+                        <i class="fas fa-sign-in-alt"></i> Sign In
+                    </button>
+                </div>
+            </form>
+
+            <!-- Login Footer -->
+            <div class="login-footer">
+                <div class="create-account-section">
+                    <p>New to Farmer 2 Consumer?</p>
+                    <button class="btn-create-account-link" onclick="showRegisterModal(); closeModal('loginModal');">
+                        <i class="fas fa-user-plus"></i> Create Your Account
+                    </button>
+                </div>
+                <div class="demo-accounts-enhanced">
+                    <div class="demo-header">
+                        <h4><i class="fas fa-play-circle"></i> Try Demo Accounts</h4>
+                        <p>Experience the platform with pre-configured accounts</p>
+                    </div>
+                    <div class="demo-cards-grid">
+                        <div class="demo-card farmer-demo" onclick="loginWithDemo('farmer')">
+                            <div class="demo-card-header">
+                                <div class="demo-icon">🌾</div>
+                                <div class="demo-info">
+                                    <h5>Farmer Demo</h5>
+                                    <span class="demo-email">farmer@demo.com</span>
+                                </div>
+                            </div>
+                            <div class="demo-features">
+                                <span class="demo-feature">• Manage Products</span>
+                                <span class="demo-feature">• View Orders</span>
+                                <span class="demo-feature">• Track Sales</span>
+                            </div>
+                            <button class="btn-demo-login">
+                                <i class="fas fa-sign-in-alt"></i> Login as Farmer
+                            </button>
+                        </div>
+
+                        <div class="demo-card consumer-demo" onclick="loginWithDemo('consumer')">
+                            <div class="demo-card-header">
+                                <div class="demo-icon">🛒</div>
+                                <div class="demo-info">
+                                    <h5>Consumer Demo</h5>
+                                    <span class="demo-email">consumer@demo.com</span>
+                                </div>
+                            </div>
+                            <div class="demo-features">
+                                <span class="demo-feature">• Browse Products</span>
+                                <span class="demo-feature">• Place Orders</span>
+                                <span class="demo-feature">• Track Deliveries</span>
+                            </div>
+                            <button class="btn-demo-login">
+                                <i class="fas fa-sign-in-alt"></i> Login as Consumer
+                            </button>
+                        </div>
+
+                        <div class="demo-card wholesaler-demo" onclick="loginWithDemo('wholesaler')">
+                            <div class="demo-card-header">
+                                <div class="demo-icon">🏭</div>
+                                <div class="demo-info">
+                                    <h5>Wholesaler Demo</h5>
+                                    <span class="demo-email">wholesaler@demo.com</span>
+                                </div>
+                            </div>
+                            <div class="demo-features">
+                                <span class="demo-feature">• Bulk Orders</span>
+                                <span class="demo-feature">• Place Bids</span>
+                                <span class="demo-feature">• Manage Inventory</span>
+                            </div>
+                            <button class="btn-demo-login">
+                                <i class="fas fa-sign-in-alt"></i> Login as Wholesaler
+                            </button>
+                        </div>
+                    </div>
+                    <div class="demo-note">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Demo accounts are pre-configured with sample data for testing purposes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content enhanced-modal register-modal-redesigned">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            
+            <!-- Welcome Section -->
+            <div class="register-welcome">
+                <div class="welcome-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <h1>Join Farmer 2 Consumer</h1>
+                <p class="welcome-subtitle">Connect with fresh produce and build sustainable relationships</p>
+            </div>
+
+            <!-- User Type Selection -->
+            <div class="user-type-selection">
+                <h3>Choose Your Role</h3>
+                <div class="user-type-cards">
+                    <div class="user-type-card" onclick="selectUserType('farmer')">
+                        <div class="type-icon">🌾</div>
+                        <h4>Farmer</h4>
+                        <p>Sell your fresh produce directly to consumers</p>
+                        <div class="type-benefits">
+                            <span>• Fair pricing</span>
+                            <span>• Direct sales</span>
+                            <span>• No middlemen</span>
+                        </div>
+                    </div>
+                    <div class="user-type-card" onclick="selectUserType('consumer')">
+                        <div class="type-icon">🛒</div>
+                        <h4>Consumer</h4>
+                        <p>Buy fresh produce directly from local farmers</p>
+                        <div class="type-benefits">
+                            <span>• Fresh quality</span>
+                            <span>• Same-day delivery</span>
+                            <span>• Support local</span>
+                        </div>
+                    </div>
+                    <div class="user-type-card" onclick="selectUserType('wholesaler')">
+                        <div class="type-icon">🏭</div>
+                        <h4>Wholesaler</h4>
+                        <p>Purchase in bulk with competitive bidding</p>
+                        <div class="type-benefits">
+                            <span>• Bulk pricing</span>
+                            <span>• Bidding system</span>
+                            <span>• Direct sourcing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registration Form -->
+            <form id="registerForm" class="register-form-redesigned" style="display: none;">
+                <input type="hidden" id="selectedUserType" value="">
+                
+                <div class="form-step active" id="step1">
+                    <h3>Personal Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group modern-input">
+                            <input type="text" id="registerName" required>
+                            <label for="registerName">Full Name</label>
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="form-group modern-input">
+                            <input type="email" id="registerEmail" required>
+                            <label for="registerEmail">Email Address</label>
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="form-group modern-input">
+                            <input type="tel" id="registerPhone" required>
+                            <label for="registerPhone">Phone Number</label>
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="form-group modern-input">
+                            <input type="password" id="registerPassword" required>
+                            <label for="registerPassword">Create Password</label>
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-next" onclick="nextStep()">
+                        Continue <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="form-step" id="step2">
+                    <h3>Location Details</h3>
+                    <div class="form-group modern-input full-width">
+                        <textarea id="registerAddress" required></textarea>
+                        <label for="registerAddress">Complete Address</label>
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="location-actions">
+                        <button type="button" class="btn-location-modern" onclick="getLocation()">
+                            <i class="fas fa-crosshairs"></i> Use Current Location
+                        </button>
+                        <span id="locationStatus" class="location-status-modern"></span>
+                    </div>
+                    <div class="step-actions">
+                        <button type="button" class="btn-back" onclick="prevStep()">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button type="submit" class="btn-create-account">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="register-footer">
+                <p>Already have an account? <a href="#" class="link-signin" onclick="showLoginModal(); closeModal('registerModal');">Sign In Here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bidding Modal -->
+    <div id="biddingModal" class="modal">
+        <div class="modal-content enhanced-modal bidding-modal">
+            <span class="close" onclick="closeModal('biddingModal')">&times;</span>
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="fas fa-gavel"></i>
+                </div>
+                <h2>Place Your Bid</h2>
+                <p>Negotiate directly with farmers for bulk orders</p>
+            </div>
+            <div class="bidding-content">
+                <div class="product-summary" id="biddingProductSummary">
+                    <!-- Product details will be populated here -->
+                </div>
+                <div class="bidding-form">
+                    <div class="current-price">
+                        <label>Current Price:</label>
+                        <span id="currentPrice">₹0/kg</span>
+                    </div>
+                    <div class="form-group enhanced-input">
+                        <i class="fas fa-weight input-icon"></i>
+                        <input type="number" id="bidQuantity" placeholder="Enter quantity in kg" min="50" required>
+                        <label for="bidQuantity">Quantity (minimum 50kg)</label>
+                    </div>
+                    <div class="form-group enhanced-input">
+                        <i class="fas fa-rupee-sign input-icon"></i>
+                        <input type="number" id="bidPrice" placeholder="Enter your bid price per kg" step="0.01" required>
+                        <label for="bidPrice">Your Bid Price (₹/kg)</label>
+                    </div>
+                    <div class="form-group enhanced-input">
+                        <i class="fas fa-comment input-icon"></i>
+                        <textarea id="bidMessage" placeholder="Add a message for the farmer (optional)"></textarea>
+                        <label for="bidMessage">Message</label>
+                    </div>
+                    <div class="bid-summary">
+                        <div class="summary-row">
+                            <span>Quantity:</span>
+                            <span id="summaryQuantity">0 kg</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Your Bid:</span>
+                            <span id="summaryBidPrice">₹0/kg</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total Amount:</span>
+                            <span id="summaryTotal">₹0</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-primary enhanced-btn" onclick="submitBid()">
+                        <i class="fas fa-gavel"></i>
+                        Place Bid
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bid Management Modal (for farmers) -->
+    <div id="bidManagementModal" class="modal">
+        <div class="modal-content enhanced-modal bid-management-modal">
+            <span class="close" onclick="closeModal('bidManagementModal')">&times;</span>
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h2>Manage Bids</h2>
+                <p>Review and respond to wholesaler bids</p>
+            </div>
+            <div class="bid-list" id="bidList">
+                <!-- Bids will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer enhanced-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-seedling"></i>
+                        <span>Farmer 2 Consumer</span>
+                    </div>
+                    <p class="footer-description">Connecting farms to families with fresh, quality produce delivered the same day. Building sustainable relationships between farmers and consumers.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>For Farmers</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-plus"></i> List Products</a></li>
+                        <li><a href="#"><i class="fas fa-chart-line"></i> Track Sales</a></li>
+                        <li><a href="#"><i class="fas fa-calendar"></i> Manage Orders</a></li>
+                        <li><a href="#"><i class="fas fa-truck"></i> Delivery Schedule</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>For Consumers</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-search"></i> Browse Products</a></li>
+                        <li><a href="#"><i class="fas fa-shopping-cart"></i> Place Orders</a></li>
+                        <li><a href="#"><i class="fas fa-heart"></i> Save Favorites</a></li>
+                        <li><a href="#"><i class="fas fa-receipt"></i> Order History</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-question-circle"></i> Help Center</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> Contact Us</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> Terms of Service</a></li>
+                        <li><a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Farm Street, Agriculture City, AC 12345</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 98765 43210</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>support@farmer2consumer.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>24/7 Customer Support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 Farmer 2 Consumer. All rights reserved.</p>
+                    <div class="footer-badges">
+                        <span class="badge"><i class="fas fa-leaf"></i> 100% Organic</span>
+                        <span class="badge"><i class="fas fa-shield-check"></i> Quality Assured</span>
+                        <span class="badge"><i class="fas fa-truck-fast"></i> Same Day Delivery</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/sample-data.js"></script>
+    <script src="js/chatbox-config.js"></script>
+    <script src="js/chatbox.js"></script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbox Test - Farmer 2 Consumer</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/enhancements.css">
+    <link rel="stylesheet" href="styles/chatbox.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0f8f0, #e8f5e8);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .test-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 600px;
+        }
+        .test-title {
+            color: #2c5530;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        .test-description {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .api-status {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+        }
+        .test-questions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .test-question {
+            background: linear-gradient(135deg, #ABB900, #DAE039);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 0.9rem;
+        }
+        .test-question:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(171, 185, 0, 0.3);
+        }
+        .chat-indicator {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: #83B7DE;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            animation: bounce 2s infinite;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1 class="test-title">🤖 Chatbox Test Page</h1>
+        <p class="test-description">
+            Your chatbox is now powered by <strong>Google Gemini AI</strong>! 
+            Click the chat button in the bottom-right corner to start a conversation.
+        </p>
+        
+        <div class="api-status">
+            <i class="fas fa-check-circle"></i>
+            <strong>Google Gemini API Configured</strong><br>
+            The chatbox will use AI responses with fallback to pre-written answers.
+        </div>
+        
+        <p><strong>Try asking these questions:</strong></p>
+        
+        <div class="test-questions">
+            <button class="test-question" onclick="askQuestion('How does same-day delivery work?')">
+                🚚 Same-day Delivery
+            </button>
+            <button class="test-question" onclick="askQuestion('What are Grade A and Grade B products?')">
+                ⭐ Product Grades
+            </button>
+            <button class="test-question" onclick="askQuestion('How can I become a farmer partner?')">
+                🌾 Farmer Partnership
+            </button>
+            <button class="test-question" onclick="askQuestion('What payment methods do you accept?')">
+                💳 Payment Options
+            </button>
+            <button class="test-question" onclick="askQuestion('How do I place a bulk order?')">
+                📦 Bulk Orders
+            </button>
+            <button class="test-question" onclick="askQuestion('Tell me about your quality assurance')">
+                🛡️ Quality Assurance
+            </button>
+        </div>
+        
+        <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+            <h3 style="color: #2c5530; margin-bottom: 15px;">🔧 How It Works</h3>
+            <div style="text-align: left; color: #666;">
+                <p><strong>1. AI First:</strong> Questions are sent to Google Gemini AI for intelligent responses</p>
+                <p><strong>2. Smart Fallback:</strong> If API fails, uses 50+ pre-written responses</p>
+                <p><strong>3. Context Aware:</strong> AI knows about your platform features and can provide detailed help</p>
+                <p><strong>4. Always Available:</strong> Works 24/7 to help your users</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="chat-indicator">
+        👆 Click here to chat!
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/chatbox-config.js"></script>
+    <script src="js/chatbox.js"></script>
+    
+    <script>
+        function askQuestion(question) {
+            // Open chatbox and send the question
+            if (window.chatbox) {
+                window.chatbox.toggleChatbox();
+                setTimeout(() => {
+                    window.chatbox.sendMessage(question);
+                }, 500);
+            }
+        }
+        
+        // Show success message when chatbox loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                if (window.chatbox) {
+                    console.log('✅ Chatbox loaded successfully with Google Gemini API!');
+                    
+                    // Test API configuration
+                    const config = window.CHATBOX_CONFIG;
+                    if (config.apiProvider === 'gemini' && config.apiKey) {
+                        console.log('🤖 Google Gemini API configured and ready!');
+                    }
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

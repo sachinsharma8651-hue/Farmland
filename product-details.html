@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Product Details - Farmer 2 Consumer</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/enhancements.css">
+    <link rel="stylesheet" href="styles/product-details.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-seedling"></i>
+                <span>Farmer 2 Consumer</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">
+                    <i class="fas fa-arrow-left"></i> Back to Products
+                </a>
+                <div class="header-actions">
+                    <div class="cart-icon" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                    <button class="btn-login" onclick="showLoginModal()">Login</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Product Details Container -->
+    <main class="product-details-container">
+        <!-- Product Hero Section -->
+        <section class="product-hero">
+            <div class="container">
+                <div class="product-hero-content">
+                    <!-- Product Image -->
+                    <div class="product-image-section">
+                        <div class="product-main-image" id="productMainImage">
+                            <div class="product-visual-large" id="productVisual">🥕</div>
+                            <div class="image-overlay">
+                                <div class="freshness-indicator">
+                                    <i class="fas fa-leaf"></i>
+                                    <span>Fresh Today</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-thumbnails">
+                            <div class="thumbnail active" onclick="changeProductView('main')">
+                                <span>🥕</span>
+                            </div>
+                            <div class="thumbnail" onclick="changeProductView('farm')">
+                                <i class="fas fa-tractor"></i>
+                            </div>
+                            <div class="thumbnail" onclick="changeProductView('harvest')">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Information -->
+                    <div class="product-info-section">
+                        <div class="product-breadcrumb">
+                            <span>Vegetables</span> <i class="fas fa-chevron-right"></i> <span id="productCategory">Fresh Carrots</span>
+                        </div>
+                        
+                        <h1 class="product-title" id="productTitle">Fresh Organic Carrots</h1>
+                        
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-text">4.8 (127 reviews)</span>
+                        </div>
+
+                        <p class="product-description" id="productDescription">
+                            Premium quality organic carrots grown with sustainable farming practices. 
+                            Rich in beta-carotene, vitamins, and minerals. Perfect for cooking, juicing, or eating raw.
+                        </p>
+
+                        <!-- Farmer Information -->
+                        <div class="farmer-info-card">
+                            <div class="farmer-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="farmer-details">
+                                <h4 id="farmerName">Green Valley Farm</h4>
+                                <p id="farmerLocation">Punjab, India</p>
+                                <div class="farmer-badges">
+                                    <span class="badge organic">Organic Certified</span>
+                                    <span class="badge verified">Verified Farmer</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Grade Selection -->
+                        <div class="grade-selection-detailed">
+                            <h3>Select Grade</h3>
+                            <div class="grade-cards">
+                                <div class="grade-card active" onclick="selectDetailedGrade('grade-a', 45)" data-grade="grade-a" data-price="45">
+                                    <div class="grade-header">
+                                        <span class="grade-badge grade-a">Grade A</span>
+                                        <span class="grade-price">₹45/kg</span>
+                                    </div>
+                                    <ul class="grade-features">
+                                        <li><i class="fas fa-check"></i> Premium quality</li>
+                                        <li><i class="fas fa-check"></i> Perfect shape & size</li>
+                                        <li><i class="fas fa-check"></i> No blemishes</li>
+                                    </ul>
+                                </div>
+                                <div class="grade-card" onclick="selectDetailedGrade('grade-b', 35)" data-grade="grade-b" data-price="35">
+                                    <div class="grade-header">
+                                        <span class="grade-badge grade-b">Grade B</span>
+                                        <span class="grade-price">₹35/kg</span>
+                                    </div>
+                                    <ul class="grade-features">
+                                        <li><i class="fas fa-check"></i> Good quality</li>
+                                        <li><i class="fas fa-check"></i> Minor imperfections</li>
+                                        <li><i class="fas fa-check"></i> Great value</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quantity Selection -->
+                        <div class="quantity-selection-detailed">
+                            <h3>Select Quantity</h3>
+                            <div class="quantity-cards">
+                                <div class="quantity-card" onclick="selectDetailedQuantity('250g')" data-quantity="250g">
+                                    <span class="quantity-amount">250g</span>
+                                    <span class="quantity-price" id="price250g">₹11.25</span>
+                                </div>
+                                <div class="quantity-card" onclick="selectDetailedQuantity('500g')" data-quantity="500g">
+                                    <span class="quantity-amount">500g</span>
+                                    <span class="quantity-price" id="price500g">₹22.50</span>
+                                </div>
+                                <div class="quantity-card active" onclick="selectDetailedQuantity('1kg')" data-quantity="1kg">
+                                    <span class="quantity-amount">1kg</span>
+                                    <span class="quantity-price" id="price1kg">₹45.00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Purchase Actions -->
+                        <div class="purchase-actions">
+                            <div class="price-summary">
+                                <span class="current-price" id="currentPrice">₹45.00</span>
+                                <span class="price-per-kg" id="pricePerKg">₹45/kg</span>
+                            </div>
+                            <div class="action-buttons">
+                                <button class="btn-add-to-cart" onclick="addToCartFromDetails()">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    Add to Cart
+                                </button>
+                                <button class="btn-buy-now" onclick="buyNow()">
+                                    <i class="fas fa-bolt"></i>
+                                    Buy Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Details Tabs -->
+        <section class="product-tabs-section">
+            <div class="container">
+                <div class="tabs-navigation">
+                    <button class="tab-btn active" onclick="switchTab('details')">Details</button>
+                    <button class="tab-btn" onclick="switchTab('nutrition')">Nutrition</button>
+                    <button class="tab-btn" onclick="switchTab('reviews')">Reviews</button>
+                    <button class="tab-btn" onclick="switchTab('farm')">Farm Info</button>
+                </div>
+
+                <div class="tab-content">
+                    <!-- Details Tab -->
+                    <div class="tab-panel active" id="detailsTab">
+                        <div class="details-grid">
+                            <div class="detail-card">
+                                <h4><i class="fas fa-seedling"></i> Growing Method</h4>
+                                <p>Organically grown without pesticides or chemical fertilizers</p>
+                            </div>
+                            <div class="detail-card">
+                                <h4><i class="fas fa-calendar"></i> Harvest Date</h4>
+                                <p>Harvested fresh this morning</p>
+                            </div>
+                            <div class="detail-card">
+                                <h4><i class="fas fa-truck"></i> Delivery</h4>
+                                <p>Same-day delivery available in your area</p>
+                            </div>
+                            <div class="detail-card">
+                                <h4><i class="fas fa-thermometer-half"></i> Storage</h4>
+                                <p>Store in refrigerator for up to 2 weeks</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nutrition Tab -->
+                    <div class="tab-panel" id="nutritionTab">
+                        <div class="nutrition-info">
+                            <h4>Nutritional Information (per 100g)</h4>
+                            <div class="nutrition-grid">
+                                <div class="nutrition-item">
+                                    <span class="nutrient">Calories</span>
+                                    <span class="value">41 kcal</span>
+                                </div>
+                                <div class="nutrition-item">
+                                    <span class="nutrient">Carbohydrates</span>
+                                    <span class="value">9.6g</span>
+                                </div>
+                                <div class="nutrition-item">
+                                    <span class="nutrient">Fiber</span>
+                                    <span class="value">2.8g</span>
+                                </div>
+                                <div class="nutrition-item">
+                                    <span class="nutrient">Vitamin A</span>
+                                    <span class="value">835μg</span>
+                                </div>
+                                <div class="nutrition-item">
+                                    <span class="nutrient">Vitamin K</span>
+                                    <span class="value">13.2μg</span>
+                                </div>
+                                <div class="nutrition-item">
+                                    <span class="nutrient">Potassium</span>
+                                    <span class="value">320mg</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reviews Tab -->
+                    <div class="tab-panel" id="reviewsTab">
+                        <div class="reviews-container">
+                            <div class="review-item">
+                                <div class="reviewer-info">
+                                    <div class="reviewer-avatar">
+                                        <i class="fas fa-user-circle"></i>
+                                    </div>
+                                    <div class="reviewer-details">
+                                        <h5>Priya Sharma</h5>
+                                        <div class="review-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="review-text">Excellent quality carrots! Very fresh and sweet. Delivered on time.</p>
+                                <span class="review-date">2 days ago</span>
+                            </div>
+                            <div class="review-item">
+                                <div class="reviewer-info">
+                                    <div class="reviewer-avatar">
+                                        <i class="fas fa-user-circle"></i>
+                                    </div>
+                                    <div class="reviewer-details">
+                                        <h5>Rajesh Kumar</h5>
+                                        <div class="review-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="review-text">Good quality and reasonable price. Will order again.</p>
+                                <span class="review-date">1 week ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Farm Info Tab -->
+                    <div class="tab-panel" id="farmTab">
+                        <div class="farm-info">
+                            <div class="farm-header">
+                                <h4>Green Valley Farm</h4>
+                                <p>Sustainable farming since 1995</p>
+                            </div>
+                            <div class="farm-details">
+                                <div class="farm-stat">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Punjab, India</span>
+                                </div>
+                                <div class="farm-stat">
+                                    <i class="fas fa-leaf"></i>
+                                    <span>100% Organic Certified</span>
+                                </div>
+                                <div class="farm-stat">
+                                    <i class="fas fa-award"></i>
+                                    <span>25+ Years Experience</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Products -->
+        <section class="related-products">
+            <div class="container">
+                <h2>You might also like</h2>
+                <div class="related-grid">
+                    <div class="related-item" onclick="loadProduct('peppers')">
+                        <div class="related-image">🌶️</div>
+                        <h4>Bell Peppers</h4>
+                        <span class="related-price">₹65/kg</span>
+                    </div>
+                    <div class="related-item" onclick="loadProduct('spinach')">
+                        <div class="related-image">🥬</div>
+                        <h4>Spinach</h4>
+                        <span class="related-price">₹30/kg</span>
+                    </div>
+                    <div class="related-item" onclick="loadProduct('tomatoes')">
+                        <div class="related-image">🍅</div>
+                        <h4>Tomatoes</h4>
+                        <span class="related-price">₹40/kg</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Cart Dropdown (reused from main page) -->
+    <div id="cartDropdown" class="cart-dropdown">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button class="cart-close" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Your cart is empty</p>
+                <small>Add some fresh produce to get started!</small>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total: ₹<span id="cartTotal">0</span></strong>
+            </div>
+            <button class="btn-checkout" onclick="checkout()">
+                <i class="fas fa-credit-card"></i> Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/product-details.js"></script>
+</body>
+</html>
