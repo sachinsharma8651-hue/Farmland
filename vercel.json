@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "farmland/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/$", "dest": "/farmland/index.html" },
+    { "src": "/(.*)", "dest": "/farmland/$1" }
+  ]
+}
